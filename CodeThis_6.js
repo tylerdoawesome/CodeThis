@@ -35,12 +35,23 @@ Solution: Use the array.prototype.includes() function.
 
 function checkMagazine(magazine, note) {
 
-    let noMatch = 0;
-    note.forEach(item => {
-        if (!magazine.includes(item)) {
-            noMatch++;
-        }
+    let m = magazine.split(' ');
+    let n = note.split(' ');
+
+    let match_count = 0;
+
+    n.forEach(note_item => {
+        m.forEach((mag_item, index) => {
+            if (note_item == mag_item) {
+                match_count++;
+                m.splice(index, 1);
+            }
+        });
     });
 
-    match > 0 ? return false : return true;
+    if (match_count == n.length) {
+        return 'true';
+    } else {
+        return 'false';
+    }
 }
